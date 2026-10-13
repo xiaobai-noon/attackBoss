@@ -75,7 +75,8 @@ func _on_choice(index: int) -> void:
 	for key in ["skill", "network", "stress", "money"]:
 		var v := int(effects.get(key, 0))
 		if v != 0:
-			var name_cn := {"skill": "技能", "network": "人脉", "stress": "压力", "money": "金钱"}[key]
+			var name_map: Dictionary = {"skill": "技能", "network": "人脉", "stress": "压力", "money": "金钱"}
+			var name_cn: String = str(name_map.get(key, key))
 			parts.append("%s %+d" % [name_cn, v])
 	_result_label.text = "选择结果：%s" % ("、".join(parts) if parts.size() > 0 else "无属性变化")
 
