@@ -1,0 +1,29 @@
+; Engine configuration file.
+; Godot 4.x / AttackBoss career sim skeleton
+
+config_version=5
+
+[application]
+
+config/name="AttackBoss"
+config/name_localized={"zh_CN": "打工人逆袭"}
+config/description="Workplace life sim: daily choices, stats growth, promotions toward CEO."
+run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://autoload/game_state.gd"
+EventBus="*res://autoload/event_bus.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

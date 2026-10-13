@@ -1,0 +1,77 @@
+[
+  {
+    "id": "overtime_project",
+    "title": "紧急加班",
+    "body": "老板突然甩来一个紧急项目，今晚必须交。你是硬扛加班，还是找同事一起分担？",
+    "choices": [
+      {
+        "text": "通宵肝完（技能↑↑ 压力↑↑）",
+        "effects": { "skill": 8, "network": 0, "stress": 15, "money": 50 }
+      },
+      {
+        "text": "拉上同事一起做（人脉↑ 技能↑）",
+        "effects": { "skill": 4, "network": 6, "stress": 5, "money": 20 }
+      }
+    ]
+  },
+  {
+    "id": "coffee_chat",
+    "title": "茶水间闲聊",
+    "body": "茶水间里几个同事在聊八卦。加入他们能扩展人脉，但也可能浪费时间、惹是非。",
+    "choices": [
+      {
+        "text": "热情加入聊天（人脉↑↑ 压力↓）",
+        "effects": { "skill": 0, "network": 8, "stress": -5, "money": 0 }
+      },
+      {
+        "text": "礼貌点头后离开（技能↑）",
+        "effects": { "skill": 3, "network": 1, "stress": -2, "money": 0 }
+      }
+    ]
+  },
+  {
+    "id": "training_course",
+    "title": "部门培训",
+    "body": "公司组织了一场免费技能培训，但要占用下班时间，还有人约你去聚餐。",
+    "choices": [
+      {
+        "text": "认真参加培训（技能↑↑）",
+        "effects": { "skill": 10, "network": 2, "stress": 8, "money": 0 }
+      },
+      {
+        "text": "去聚餐拓展人脉（人脉↑↑ 钱↓）",
+        "effects": { "skill": 0, "network": 10, "stress": -8, "money": -80 }
+      }
+    ]
+  },
+  {
+    "id": "client_dinner",
+    "title": "客户饭局",
+    "body": "重要客户邀请你晚饭。搞定了有奖金，但应酬很累；推掉可能得罪人。",
+    "choices": [
+      {
+        "text": "全力应酬拿下合同（人脉↑ 钱↑↑ 压力↑）",
+        "effects": { "skill": 2, "network": 7, "stress": 12, "money": 300 }
+      },
+      {
+        "text": "委婉推掉，早点回家休息（压力↓）",
+        "effects": { "skill": 0, "network": -2, "stress": -10, "money": 0 }
+      }
+    ]
+  },
+  {
+    "id": "side_hustle",
+    "title": "周末副业机会",
+    "body": "朋友介绍了一个周末兼职。能多赚钱练手，但会挤占休息时间。",
+    "choices": [
+      {
+        "text": "接单干了（技能↑ 钱↑ 压力↑）",
+        "effects": { "skill": 5, "network": 3, "stress": 10, "money": 200 }
+      },
+      {
+        "text": "拒绝，好好休息（压力↓）",
+        "effects": { "skill": 0, "network": 0, "stress": -15, "money": 0 }
+      }
+    ]
+  }
+]
