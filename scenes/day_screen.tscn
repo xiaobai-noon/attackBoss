@@ -98,6 +98,12 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 text = "选项 B"
 
+[node name="BtnChoiceC" type="Button" parent="Margin/VBox/ChoicesBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "选项 C"
+
 [node name="ResultBox" type="VBoxContainer" parent="Margin/VBox"]
 unique_name_in_owner = true
 visible = false
@@ -115,4 +121,4 @@ text = "结果"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
-text = "进入下一天"
+text = "进入下一周"

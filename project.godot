@@ -14,11 +14,11 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="AttackBoss"
+config/name="Attack Boss"
 config/name_localized={
-"zh_CN": "打工人上位"
+"zh_CN": "打boss"
 }
-config/description="Workplace life sim: daily choices, stats growth, promotions toward CEO."
+config/description="Workplace life sim with year cycles and rewind: climb from intern to CEO."
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

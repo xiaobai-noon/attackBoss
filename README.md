@@ -1,93 +1,51 @@
-# 打工人上位（AttackBoss）
+# 打boss（Attack Boss）
 
-Godot 4 职场人生模拟游戏最小可玩骨架：每天抽一个职场事件，做选择 → 属性变化 → 尝试晋升 → 冲击 CEO。
+Godot 4 职场人生模拟：从实习生晋升到 CEO。核心机制为年度回合与「困局回溯」。
+
+策划文档见 [`docs/职级轮回_游戏策划书.md`](docs/职级轮回_游戏策划书.md)（游戏定名《打boss》）。
 
 ## 运行要求
 
-- **Godot 4.3+**（兼容 Godot 4.x / 目标 4.7）
-- 推荐使用 **GL Compatibility** 渲染器（已在 `project.godot` 中配置，适合 2D/UI）
+- **Godot 4.3+**（目标 4.7）
+- 推荐 **GL Compatibility** 渲染器
 
 ## 如何打开运行
 
 1. 安装 [Godot 4](https://godotengine.org/download)
-2. 打开 Godot → **Import** / **导入** → 选择本仓库中的 `project.godot`
-3. 点击 **运行**（F5），主场景为 `scenes/main_menu.tscn`
-4. 主菜单点「新游戏」进入每天循环；有存档时可点「继续游戏」
+2. 打开 Godot → **Import** → 选择本仓库 `project.godot`
+3. 按 **F5** 运行（主场景 `scenes/main_menu.tscn`）
+4. 选择「普通模式」或「回溯模式」开始；有存档可「继续游戏」
+
+## 当前开发进度（本地）
+
+| 模块 | 状态 |
+|---|---|
+| M1 七维数值 | ✅ |
+| M2 年/季/周推进 | ✅ |
+| M3 事件池（20 事件）+ 加权抽取 | ✅ 轻量 |
+| M4 正式晋升门槛表 | ⏳ 暂用简易晋升 |
+| M5 困局回溯弹窗 | ⏳ 未做 |
+| M6 存档 schema v2 | ✅ 基础 |
+| M7 五结局界面 | ⏳ stub |
+| M8 NPC 好感 | ✅ 薄实现（事件挂钩） |
+
+## 冒烟测试
+
+```bash
+godot --path . --headless --script res://scripts/smoke_test.gd
+```
 
 ## 文件夹结构
 
 ```
 attackBoss/
-├── project.godot          # 工程配置、Autoload
-├── autoload/
-│   ├── game_state.gd      # 玩家属性、天数、职级、存档
-│   └── event_bus.gd       # 全局信号总线
-├── data/
-│   └── events.json        # 职场事件数据
-├── scripts/
-│   ├── event_loader.gd    # 加载 / 随机抽取事件
-│   └── smoke_test.gd      # 无头冒烟测试（--script）
-├── scenes/
-│   ├── main_menu.tscn     # 主菜单
-│   ├── main_menu.gd
-│   ├── day_screen.tscn    # 每天事件界面
-│   └── day_screen.gd
-├── ui/                    # 可放自定义 UI 组件
-├── resources/             # 可放 Resource / Theme 等
-└── README.md
+├── docs/                 # 策划书
+├── autoload/             # GameState / EventBus
+├── data/events.json      # 职场事件
+├── scripts/              # EventLoader / smoke_test
+└── scenes/               # 主菜单 / 回合界面
 ```
-
-## 玩法简述
-
-- **属性**：技能、人脉、压力、金钱
-- **职级**：实习生 → 初级职员 → … → CEO
-- **每天**：随机事件 → 选一项 → 结算效果 → 检查晋升 → 下一天
-- **通关**：升到 CEO 后返回主菜单（当前为通关 stub）
-- **存档**：`user://save.json`（由 `GameState.save_game` / `load_game` 读写）
-
-晋升规则（可在 `autoload/game_state.gd` 的 `try_promote` 中改）：
-
-- 需要 `skill >= 15 + rank*10` 且 `network >= 8 + rank*5`，且 `stress < 80`
-
-## 如何新增事件
-
-编辑 `data/events.json`，追加一个对象，例如：
-
-```json
-{
-  "id": "my_new_event",
-  "title": "事件标题",
-  "body": "事件描述文案……",
-  "choices": [
-    {
-      "text": "选项一的文案",
-      "effects": { "skill": 5, "network": 0, "stress": 3, "money": 0 }
-    },
-    {
-      "text": "选项二的文案",
-      "effects": { "skill": 0, "network": 5, "stress": -2, "money": -50 }
-    }
-  ]
-}
-```
-
-字段说明：
-
-| 字段 | 说明 |
-|------|------|
-| `id` | 唯一标识（字符串） |
-| `title` / `body` | 标题与正文（中文即可） |
-| `choices` | 通常 2 个选项 |
-| `effects` | 对 skill / network / stress / money 的增量（可为负） |
-
-保存后重新运行即可；`EventLoader` 会自动加载全部事件并随机抽取。
-
-## 扩展方向
-
-- 在 `ui/` 做更漂亮的属性条、弹窗
-- 用 `resources/` 做 Theme、自定义 Resource 类型的事件
-- 按 `job_title` / `day` 过滤事件池，增加剧情分支
 
 ## License
 
-学习用骨架，可按需自由修改。
+学习用项目，可按需修改。
