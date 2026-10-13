@@ -1,18 +1,18 @@
-# 打工人逆袭（AttackBoss）
+# 打工人上位（AttackBoss）
 
-Godot 4 职场生涯模拟游戏垂直切片骨架：每天面对一个职场事件，做选择 → 属性变化 → 尝试晋升 → 冲向 CEO。
+Godot 4 职场人生模拟游戏最小可玩骨架：每天抽一个职场事件，做选择 → 属性变化 → 尝试晋升 → 冲击 CEO。
 
-## 环境要求
+## 运行要求
 
 - **Godot 4.3+**（兼容 Godot 4.x / 目标 4.7）
 - 推荐使用 **GL Compatibility** 渲染器（已在 `project.godot` 中配置，适合 2D/UI）
 
-## 如何打开与运行
+## 如何打开运行
 
 1. 安装 [Godot 4](https://godotengine.org/download)
 2. 打开 Godot → **Import** / **导入** → 选择本仓库中的 `project.godot`
-3. 点击 **运行**（F5）。主场景为 `scenes/main_menu.tscn`
-4. 主菜单点「新游戏」进入每日循环；有存档时可点「继续游戏」
+3. 点击 **运行**（F5），主场景为 `scenes/main_menu.tscn`
+4. 主菜单点「新游戏」进入每天循环；有存档时可点「继续游戏」
 
 ## 文件夹结构
 
@@ -25,11 +25,12 @@ attackBoss/
 ├── data/
 │   └── events.json        # 职场事件数据
 ├── scripts/
-│   └── event_loader.gd    # 加载 / 随机抽取事件
+│   ├── event_loader.gd    # 加载 / 随机抽取事件
+│   └── smoke_test.gd      # 无头冒烟测试（--script）
 ├── scenes/
 │   ├── main_menu.tscn     # 主菜单
 │   ├── main_menu.gd
-│   ├── day_screen.tscn    # 每日事件界面
+│   ├── day_screen.tscn    # 每天事件界面
 │   └── day_screen.gd
 ├── ui/                    # 可放自定义 UI 组件
 ├── resources/             # 可放 Resource / Theme 等
@@ -48,7 +49,7 @@ attackBoss/
 
 - 需要 `skill >= 15 + rank*10` 且 `network >= 8 + rank*5`，且 `stress < 80`
 
-## 如何添加新事件
+## 如何新增事件
 
 编辑 `data/events.json`，追加一个对象，例如：
 
@@ -81,7 +82,7 @@ attackBoss/
 
 保存后重新运行即可；`EventLoader` 会自动加载全部事件并随机抽取。
 
-## 扩展建议
+## 扩展方向
 
 - 在 `ui/` 做更漂亮的属性条、弹窗
 - 用 `resources/` 做 Theme、自定义 Resource 类型的事件
@@ -89,4 +90,4 @@ attackBoss/
 
 ## License
 
-学习用骨架，可按需自行修改。
+学习用骨架，可按需自由修改。

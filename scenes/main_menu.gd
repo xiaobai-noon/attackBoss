@@ -10,8 +10,8 @@ extends Control
 
 
 func _ready() -> void:
-	_title.text = "打工人逆袭"
-	_subtitle.text = "AttackBoss · 职场生涯模拟"
+	_title.text = "打工人上位"
+	_subtitle.text = "AttackBoss · 职场人生模拟"
 	_btn_new.pressed.connect(_on_new_game)
 	_btn_continue.pressed.connect(_on_continue)
 	_btn_quit.pressed.connect(_on_quit)

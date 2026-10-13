@@ -6,7 +6,7 @@ extends RefCounted
 const EVENTS_PATH := "res://data/events.json"
 
 
-## 返回事件数组；失败时返回空数组
+## 加载事件数组；失败时返回空数组
 static func load_events() -> Array:
 	if not FileAccess.file_exists(EVENTS_PATH):
 		push_error("事件文件不存在: %s" % EVENTS_PATH)

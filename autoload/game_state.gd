@@ -33,7 +33,7 @@ func _ready() -> void:
 	pass
 
 
-## 应用属性变化（可为负）
+## 应用属性变化（可为负数）
 func apply_deltas(deltas: Dictionary) -> void:
 	skill = maxi(0, skill + int(deltas.get("skill", 0)))
 	network = maxi(0, network + int(deltas.get("network", 0)))
@@ -48,11 +48,11 @@ func advance_day() -> void:
 	EventBus.day_started.emit(day)
 
 
-## 尝试晋升：技能+人脉达标则升一级
+## 尝试晋升：技能+人脉达到下一档
 func try_promote() -> bool:
 	if rank_index >= RANKS.size() - 1:
 		return false
-	# 简单规则：每级需要 skill >= 15 + rank*10, network >= 8 + rank*5
+	# 简单规则：每档需要 skill >= 15 + rank*10, network >= 8 + rank*5
 	var need_skill := 15 + rank_index * 10
 	var need_network := 8 + rank_index * 5
 	if skill >= need_skill and network >= need_network and stress < 80:
@@ -63,7 +63,7 @@ func try_promote() -> bool:
 	return false
 
 
-## 是否已当上 CEO（通关）
+## 是否已到达 CEO（通关）
 func is_ceo() -> bool:
 	return rank_index >= RANKS.size() - 1
 

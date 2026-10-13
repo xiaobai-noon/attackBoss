@@ -1,5 +1,5 @@
 extends Control
-## 每日循环：显示状态 → 随机事件 → 选择 → 结算 / 晋升 → 下一天
+## 每天循环：显示状态 → 随机事件 → 选择 → 结算 / 晋升 → 下一天
 ## Day loop: stats → random event → choice → settle / promote → next day
 
 @onready var _day_label: Label = %DayLabel
@@ -70,19 +70,19 @@ func _on_choice(index: int) -> void:
 	GameState.apply_deltas(effects)
 	EventBus.choice_made.emit(str(_current_event.get("id", "")), index)
 
-	# 简要结果文案
+	# 可读结果文案
 	var parts: PackedStringArray = []
 	for key in ["skill", "network", "stress", "money"]:
 		var v := int(effects.get(key, 0))
 		if v != 0:
 			var name_cn := {"skill": "技能", "network": "人脉", "stress": "压力", "money": "金钱"}[key]
 			parts.append("%s %+d" % [name_cn, v])
-	_result_label.text = "选择结果：%s" % ("、".join(parts) if parts.size() > 0 else "无明显变化")
+	_result_label.text = "选择结果：%s" % ("、".join(parts) if parts.size() > 0 else "无属性变化")
 
-	# 晋升检测
+	# 尝试晋升
 	var promoted := GameState.try_promote()
 	if promoted:
-		_result_label.text += "\n🎉 晋升为【%s】！" % GameState.job_title
+		_result_label.text += "\n🎉 升职为「%s」！" % GameState.job_title
 
 	GameState.save_game()
 	EventBus.day_ended.emit(GameState.day)
@@ -93,7 +93,7 @@ func _on_choice(index: int) -> void:
 
 	if GameState.is_ceo():
 		_phase = "win"
-		_result_label.text += "\n\n🏆 恭喜！你成为了 CEO，打工人逆袭成功！"
+		_result_label.text += "\n\n🎊 恭喜！你成为了 CEO，打工人上位成功！"
 		_btn_continue.text = "返回主菜单"
 	else:
 		_btn_continue.text = "进入下一天"
