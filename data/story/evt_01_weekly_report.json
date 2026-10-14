@@ -1,0 +1,229 @@
+{
+  "id": "evt_01_weekly_report",
+  "title": "周报扩写运动",
+  "scene": "meeting_room",
+  "slot": "morning",
+  "entry": "n1",
+  "nodes": {
+    "n1": {
+      "type": "bg",
+      "scene": "meeting_room",
+      "slot": "morning",
+      "next": "n1s"
+    },
+    "n1s": {
+      "type": "shot",
+      "shot": "mr_wide",
+      "next": "n2"
+    },
+    "n2": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "周一上午九点，三号会议室。投影幕布亮着，一页纸的模板被推到每个人面前。",
+      "next": "n2s"
+    },
+    "n2s": {
+      "type": "shot",
+      "shot": "mr_detail_report",
+      "next": "n3"
+    },
+    "n3": {
+      "type": "line",
+      "speaker": "ji_heng",
+      "emotion": "pleased",
+      "side": "left",
+      "text": "「周报从这周起升级——三句话不够，要一页纸。风险、影响、下一步，缺一不可。」",
+      "next": "n3s"
+    },
+    "n3s": {
+      "type": "shot",
+      "shot": "mr_over_ji",
+      "next": "n4"
+    },
+    "n4": {
+      "type": "line",
+      "speaker": "ji_heng",
+      "emotion": "smug",
+      "side": "left",
+      "text": "「我知道大家忙。但总部看的是材料，不是加班时长。」",
+      "next": "n5"
+    },
+    "n5": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "会议室安静了两秒。几个人低头打开文档，开始堆形容词。你的一页还空着。",
+      "next": "n5s"
+    },
+    "n5s": {
+      "type": "shot",
+      "shot": "mr_empty_page",
+      "next": "n6"
+    },
+
+    "n6": {
+      "type": "choice",
+      "prompt": "这份周报，你打算怎么写？",
+      "options": [
+        { "text": "堆砌漂亮空话交差", "goto": "n10" },
+        { "text": "只写可验证事实与风险", "goto": "n20" },
+        { "text": "联合几人提议恢复短周报", "goto": "n30" }
+      ]
+    },
+
+    "n10": {
+      "type": "effect",
+      "deltas": { "performance": 4, "reputation": 2, "expertise": -1, "mind_load": 3, "health": -2 },
+      "npc_effects": {},
+      "flags_add": [],
+      "next": "n11"
+    },
+    "n11": {
+      "type": "line",
+      "speaker": "ji_heng",
+      "emotion": "pleased",
+      "side": "left",
+      "text": "「这页写得漂亮。」",
+      "next": "n11s"
+    },
+    "n11s": {
+      "type": "shot",
+      "shot": "mr_over_ji",
+      "next": "n12"
+    },
+    "n12": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "散会后你翻了翻自己写的东西，找不到一句能在半年后拿出来复用的。",
+      "next": "n12a"
+    },
+    "n12a": {
+      "type": "bg",
+      "scene": "office_floor",
+      "slot": "afternoon",
+      "next": "n12b"
+    },
+    "n12b": {
+      "type": "shot",
+      "shot": "of_detail_desk",
+      "next": "n40"
+    },
+
+    "n20": {
+      "type": "effect",
+      "deltas": { "performance": 1, "expertise": 3, "reputation": -2, "mind_load": 1 },
+      "npc_effects": { "shen_tinglan": 6 },
+      "flags_add": ["reform_seed"],
+      "next": "n21"
+    },
+    "n21": {
+      "type": "line",
+      "speaker": "ji_heng",
+      "emotion": "neutral",
+      "side": "left",
+      "text": "「……有点干。不过行。」",
+      "next": "n21s"
+    },
+    "n21s": {
+      "type": "shot",
+      "shot": "mr_over_ji",
+      "next": "n22"
+    },
+    "n22": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "当天下午，沈听澜在抄送里只回了两个字：收到。第二天，你那页被转给了战略办当模板。",
+      "next": "n22a"
+    },
+    "n22a": {
+      "type": "bg",
+      "scene": "office_floor",
+      "slot": "afternoon",
+      "next": "n22b"
+    },
+    "n22b": {
+      "type": "shot",
+      "shot": "of_detail_board",
+      "next": "n40"
+    },
+
+    "n30": {
+      "type": "effect",
+      "deltas": { "influence": 5, "reputation": 1, "performance": -2, "mind_load": 2 },
+      "npc_effects": { "tang_poxiao": 4 },
+      "flags_add": ["reform_seed"],
+      "next": "n31"
+    },
+    "n31": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "唐破晓第一个在群里说「算我一个」。半小时后，五个人拉了个小群。",
+      "next": "n31s"
+    },
+    "n31s": {
+      "type": "shot",
+      "shot": "of_detail_desk",
+      "next": "n32"
+    },
+    "n32": {
+      "type": "line",
+      "speaker": "ji_heng",
+      "emotion": "annoyed",
+      "side": "left",
+      "text": "「先按现在的做。这个再议。」",
+      "next": "n32s"
+    },
+    "n32s": {
+      "type": "shot",
+      "shot": "of_left",
+      "next": "n40"
+    },
+
+    "n40": {
+      "type": "branch",
+      "conditions": [
+        { "stat": "mind_load", "op": ">=", "value": 70, "goto": "n41" },
+        { "favor": "shen_tinglan", "op": ">=", "value": 60, "goto": "n43" }
+      ],
+      "default": "n42"
+    },
+    "n41": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "（你盯着屏幕右下角的时间，忽然觉得它跳得比昨天快。屏幕上边缘像是暗了一点。）",
+      "next": "n41s"
+    },
+    "n41s": {
+      "type": "shot",
+      "shot": "of_pressure",
+      "next": "n42"
+    },
+    "n42": {
+      "type": "line",
+      "speaker": "narrator",
+      "text": "这一周还长。",
+      "next": "n42s"
+    },
+    "n42s": {
+      "type": "shot",
+      "shot": "of_detail_board",
+      "next": "n44"
+    },
+    "n43": {
+      "type": "line",
+      "speaker": "shen_tinglan",
+      "emotion": "neutral",
+      "side": "right",
+      "text": "「你那页我看过了。下次把『下一步』写到能验收的程度。」",
+      "next": "n43s"
+    },
+    "n43s": {
+      "type": "shot",
+      "shot": "of_right",
+      "next": "n42"
+    },
+    "n44": {
+      "type": "end",
+      "ending": ""
+    }
+  }
+}

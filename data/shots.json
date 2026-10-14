@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "_comment": "《打boss》镜头表（Shot Table）。一个「镜头」= 一组分层图 + 一段相机运动。剧本用 shot 节点引用镜头 id。",
+  "design_size": [1280, 720],
+  "source_size": [2560, 1440],
+  "_source_size_note": "素材出图为设计分辨率的 2 倍，引擎侧才能从同一张图裁出不同景别（近/中/特写）。低于 2K，近景裁切会糊。",
+
+  "scope": {
+    "_comment": "范围标记。alpha 是当前唯一在做的范围（见 docs/α切片范围.md）；不在 alpha 列表里的场景属于预留，alpha 阶段不生成任何图。",
+    "alpha": {
+      "name": "α 垂直切片",
+      "scenes": ["meeting_room", "office_floor", "pantry"],
+      "events": ["weekly_report_inflation", "credit_dispute", "pantry_rumor_version"],
+      "ending": "quit_clear",
+      "note": "3 场景 / 3 事件 / 1 结局 / 约 14 分钟。事件与结局 id 对应 data/events.json 与 docs/职级轮回_游戏策划书.md 第 7/8 章。"
+    },
+    "reserved": {
+      "scenes": ["night_office"],
+      "note": "结局段落与 β / 1.0 使用，α 不做。"
+    }
+  },
+
+  "_motion_model": {
+    "zoom": "[起点, 终点] 推拉倍率。必须 ≥ 1.02（<1 会露边，=1 会除零）。",
+    "focus": "[x, y] 缩放锚点（0~1，画面不动的那一点）。常量，不随时间变。",
+    "pan": "[[x0,y0],[x1,y1]] 相机位移，单位＝屏宽/屏高的倍数。0.05 = 移动 5% 屏宽。",
+    "constraint": "|pan| × max深度 ≤ (zoom-1)/2，否则推拉平移会把图片边缘露出来。校验脚本会拦。",
+    "depth": "视差系数。各层实际位移 = pan × depth。近处动得多 → 有纵深。"
+  },
+  "moves": {
+    "in": "推近（缓）—— 注意力收拢、进入情绪",
+    "out": "拉远（缓）—— 抽离、收束、留白",
+    "pan_l": "左移 —— 扫视环境、暗示他人反应",
+    "pan_r": "右移",
+    "tilt_u": "上摇 —— 权威感、抬头看",
+    "tilt_d": "下摇 —— 压迫感、低头看",
+    "hold": "定镜微呼吸 —— 什么都不发生时用它。禁止全静止，那会看起来像 PPT。",
+    "push_shake": "推近 + 轻微震动 —— 冲击、坏消息落地"
+  },
+
+  "depth": {
+    "far": 0.22,
+    "mid": 0.50,
+    "near": 0.80,
+    "over": 1.00
+  },
+
+  "scenes": {
+    "meeting_room": {
+      "name": "三号会议室",
+      "entry": "mr_wide",
+      "reverse": { "left": "mr_over_ji", "right": "mr_over_shen" },
+      "shots": {
+        "mr_wide": {
+          "label": "定场全景 · 长桌与投影幕",
+          "move": "in",
+          "zoom": [1.08, 1.15],
+          "focus": [0.50, 0.46],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 7.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.10],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/meeting_room/mr_wide_far.png",
+            "mid": "res://assets/shot/meeting_room/mr_wide_mid.png",
+            "near": "res://assets/shot/meeting_room/mr_wide_near.png"
+          }
+        },
+        "mr_over_ji": {
+          "label": "反打 · 越过季衡侧肩看向长桌",
+          "move": "in",
+          "zoom": [1.12, 1.18],
+          "focus": [0.62, 0.43],
+          "pan": [[-0.01, 0.0], [-0.02, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.06],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/meeting_room/mr_over_ji_far.png",
+            "mid": "res://assets/shot/meeting_room/mr_over_ji_mid.png",
+            "over": "res://assets/shot/meeting_room/mr_over_ji_over.png"
+          }
+        },
+        "mr_over_shen": {
+          "label": "反打 · 越过沈听澜侧肩",
+          "move": "pan_l",
+          "zoom": [1.14, 1.16],
+          "focus": [0.42, 0.43],
+          "pan": [[0.02, 0.0], [-0.03, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.06],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/meeting_room/mr_over_shen_far.png",
+            "mid": "res://assets/shot/meeting_room/mr_over_shen_mid.png",
+            "over": "res://assets/shot/meeting_room/mr_over_shen_over.png"
+          }
+        },
+        "mr_detail_report": {
+          "label": "静物特写 · 推到每个人面前的一页纸模板",
+          "move": "in",
+          "zoom": [1.04, 1.16],
+          "focus": [0.54, 0.56],
+          "pan": [[0.0, 0.0], [0.01, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.05],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/meeting_room/mr_detail_report_mid.png"
+          }
+        },
+        "mr_empty_page": {
+          "label": "静物特写 · 你那页还空着（对空白的凝视）",
+          "move": "hold",
+          "zoom": [1.06, 1.063],
+          "focus": [0.50, 0.52],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 5.0,
+          "loop": true,
+          "grade": ["#0A0C10", 0.14],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/meeting_room/mr_empty_page_mid.png"
+          }
+        },
+        "mr_low_wide": {
+          "label": "低机位全景 · 长桌尽头望过来（压迫感）",
+          "move": "tilt_u",
+          "zoom": [1.10, 1.18],
+          "focus": [0.50, 0.60],
+          "pan": [[0.0, 0.01], [0.0, -0.01]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#120A0C", 0.18],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/meeting_room/mr_low_wide_far.png",
+            "mid": "res://assets/shot/meeting_room/mr_low_wide_mid.png",
+            "near": "res://assets/shot/meeting_room/mr_low_wide_near.png"
+          }
+        }
+      }
+    },
+
+    "office_floor": {
+      "name": "开放办公区",
+      "entry": "of_wide",
+      "reverse": { "left": "of_left", "right": "of_right" },
+      "shots": {
+        "of_wide": {
+          "label": "定场全景 · 开放办公区（横移扫视）",
+          "move": "pan_r",
+          "zoom": [1.14, 1.15],
+          "focus": [0.50, 0.48],
+          "pan": [[-0.05, 0.0], [0.05, 0.0]],
+          "dur": 8.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.08],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/office_floor/of_wide_far.png",
+            "mid": "res://assets/shot/office_floor/of_wide_mid.png",
+            "near": "res://assets/shot/office_floor/of_wide_near.png"
+          }
+        },
+        "of_left": {
+          "label": "中景 · 工位隔断后（左）",
+          "move": "in",
+          "zoom": [1.08, 1.16],
+          "focus": [0.34, 0.46],
+          "pan": [[0.0, 0.0], [0.01, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.06],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/office_floor/of_left_far.png",
+            "mid": "res://assets/shot/office_floor/of_left_mid.png",
+            "over": "res://assets/shot/office_floor/of_left_over.png"
+          }
+        },
+        "of_right": {
+          "label": "中景 · 工位隔断后（右）",
+          "move": "in",
+          "zoom": [1.08, 1.16],
+          "focus": [0.66, 0.46],
+          "pan": [[0.0, 0.0], [-0.01, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.06],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/office_floor/of_right_far.png",
+            "mid": "res://assets/shot/office_floor/of_right_mid.png",
+            "over": "res://assets/shot/office_floor/of_right_over.png"
+          }
+        },
+        "of_detail_desk": {
+          "label": "静物特写 · 工位：显示器、便签、隔夜咖啡",
+          "move": "hold",
+          "zoom": [1.05, 1.053],
+          "focus": [0.48, 0.52],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 5.0,
+          "loop": true,
+          "grade": ["#0A0C10", 0.08],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/office_floor/of_detail_desk_mid.png"
+          }
+        },
+        "of_detail_board": {
+          "label": "静物特写 · 白板上的季度/周次格（「轮回」的具象物）",
+          "move": "in",
+          "zoom": [1.06, 1.16],
+          "focus": [0.42, 0.50],
+          "pan": [[0.02, 0.0], [-0.01, 0.0]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.04],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/office_floor/of_detail_board_mid.png"
+          }
+        },
+        "of_pressure": {
+          "label": "推近 + 微震 · 负荷快顶不住那一刻",
+          "move": "push_shake",
+          "zoom": [1.10, 1.20],
+          "focus": [0.50, 0.50],
+          "pan": [[0.0, 0.0], [0.0, 0.01]],
+          "dur": 4.0,
+          "loop": false,
+          "grade": ["#140A0C", 0.22],
+          "cut": "flash",
+          "shake": 2.4,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/office_floor/of_wide_far.png",
+            "mid": "res://assets/shot/office_floor/of_wide_mid.png",
+            "near": "res://assets/shot/office_floor/of_wide_near.png"
+          }
+        }
+      }
+    },
+
+    "night_office": {
+      "name": "深夜 · 开放办公区",
+      "entry": "no_wide",
+      "reverse": {},
+      "shots": {
+        "no_wide": {
+          "label": "定场全景 · 只留几盏灯的空办公区",
+          "move": "hold",
+          "zoom": [1.08, 1.083],
+          "focus": [0.44, 0.50],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 6.0,
+          "loop": true,
+          "grade": ["#06070C", 0.24],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/night_office/no_wide_far.png",
+            "mid": "res://assets/shot/night_office/no_wide_mid.png",
+            "near": "res://assets/shot/night_office/no_wide_near.png"
+          }
+        },
+        "no_detail_screen": {
+          "label": "静物特写 · 只有屏幕光打在桌面上",
+          "move": "in",
+          "zoom": [1.05, 1.12],
+          "focus": [0.50, 0.54],
+          "pan": [[0.0, 0.0], [0.0, -0.01]],
+          "dur": 6.0,
+          "loop": false,
+          "grade": ["#05060A", 0.28],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/night_office/no_detail_screen_mid.png"
+          }
+        }
+      }
+    },
+
+    "pantry": {
+      "name": "茶水间",
+      "entry": "pt_wide",
+      "reverse": { "left": "pt_left", "right": "pt_right" },
+      "shots": {
+        "pt_wide": {
+          "label": "定场中景 · 茶水间台面与水槽（横移）",
+          "move": "pan_l",
+          "zoom": [1.14, 1.15],
+          "focus": [0.50, 0.48],
+          "pan": [[0.05, 0.0], [-0.05, 0.0]],
+          "dur": 7.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.08],
+          "cut": "fade",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "far": "res://assets/shot/pantry/pt_wide_far.png",
+            "mid": "res://assets/shot/pantry/pt_wide_mid.png",
+            "near": "res://assets/shot/pantry/pt_wide_near.png"
+          }
+        },
+        "pt_left": {
+          "label": "中景 · 咖啡机前（左）",
+          "move": "in",
+          "zoom": [1.08, 1.15],
+          "focus": [0.36, 0.45],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 5.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.05],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/pantry/pt_left_mid.png",
+            "over": "res://assets/shot/pantry/pt_left_over.png"
+          }
+        },
+        "pt_right": {
+          "label": "中景 · 咖啡机前（右）",
+          "move": "in",
+          "zoom": [1.08, 1.15],
+          "focus": [0.64, 0.45],
+          "pan": [[0.0, 0.0], [0.0, 0.0]],
+          "dur": 5.0,
+          "loop": false,
+          "grade": ["#0A0C10", 0.05],
+          "cut": "cut",
+          "shake": 0.0,
+          "clip": "",
+          "layers": {
+            "mid": "res://assets/shot/pantry/pt_right_mid.png",
+            "over": "res://assets/shot/pantry/pt_right_over.png"
+          }
+        }
+      }
+    }
+  }
+}

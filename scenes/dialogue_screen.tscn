@@ -1,0 +1,245 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/dialogue_screen.gd" id="1_dlg"]
+[ext_resource type="Script" path="res://scripts/shot_director.gd" id="2_shot"]
+
+[node name="DialogueScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dlg")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11, 0.13, 0.17, 1)
+
+[node name="ShotLayer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_shot")
+
+[node name="SceneName" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.06)
+theme_override_font_sizes/font_size = 84
+text = "场景"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PortraitLeft" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -640.0
+offset_right = 300.0
+offset_bottom = -320.0
+grow_vertical = 0
+
+[node name="PBox" type="VBoxContainer" parent="PortraitLeft"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="PortraitLeft/PBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "角色"
+horizontal_alignment = 1
+
+[node name="StateLabel" type="Label" parent="PortraitLeft/PBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.45)
+theme_override_font_sizes/font_size = 14
+text = "表情"
+horizontal_alignment = 1
+
+[node name="PortraitRight" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -640.0
+offset_right = -40.0
+offset_bottom = -320.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PBox" type="VBoxContainer" parent="PortraitRight"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="PortraitRight/PBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "角色"
+horizontal_alignment = 1
+
+[node name="StateLabel" type="Label" parent="PortraitRight/PBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.45)
+theme_override_font_sizes/font_size = 14
+text = "表情"
+horizontal_alignment = 1
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 18.0
+offset_right = -32.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_constants/separation = 24
+
+[node name="TimeLabel" type="Label" parent="TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 15
+text = "第 1 年 · Q1 · 周一 · 上午"
+
+[node name="DockLabel" type="Label" parent="TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.3)
+theme_override_font_sizes/font_size = 14
+text = "事件标题"
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 15
+text = "绩效 40 · 专业 35 · 负荷 0 · 健康 80"
+horizontal_alignment = 2
+
+[node name="ResultToast" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 17
+text = "结算"
+horizontal_alignment = 1
+
+[node name="Bottom" type="VBoxContainer" parent="."]
+layout_mode = 1
+mouse_filter = 2
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = -296.0
+offset_right = -56.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="ChoicesBox" type="VBoxContainer" parent="Bottom"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="SpeakerWrap" type="PanelContainer" parent="Bottom"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="SpeakerLabel" type="Label" parent="Bottom/SpeakerWrap"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "说话人"
+
+[node name="DialoguePanel" type="PanelContainer" parent="Bottom"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 156)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DlgMargin" type="MarginContainer" parent="Bottom/DialoguePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 16
+
+[node name="DlgBox" type="VBoxContainer" parent="Bottom/DialoguePanel/DlgMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="DialogueText" type="RichTextLabel" parent="Bottom/DialoguePanel/DlgMargin/DlgBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "对话文本"
+
+[node name="HintLabel" type="Label" parent="Bottom/DialoguePanel/DlgMargin/DlgBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.35)
+theme_override_font_sizes/font_size = 13
+text = "▼ 点击 / 空格继续"
+horizontal_alignment = 2
