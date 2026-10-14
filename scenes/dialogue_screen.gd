@@ -133,8 +133,8 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	# 结算提示轻微闪烁结束后不拦截输入
-	var is_click := event is InputEventMouseButton \
-		and event.pressed and event.button_index == MOUSE_BUTTON_LEFT
+	var is_click: bool = event is InputEventMouseButton \
+		and (event as InputEventMouseButton).pressed and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT
 
 	if event is InputEventKey and event.pressed and not event.echo:
 		var kc: Key = event.keycode

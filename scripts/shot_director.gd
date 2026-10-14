@@ -263,7 +263,7 @@ func play_reverse(side: String) -> bool:
 
 func stop() -> void:
 	_active = false
-	if _clip != null and _clip.playing:
+	if _clip != null and _clip.is_playing():
 		_clip.stop()
 
 
@@ -363,7 +363,7 @@ func _play_clip_or_stills(shot: Dictionary, skip_cut: bool) -> void:
 
 	# 无视频（或视频还没做）→ 退回静态分层。这一步是整条流水线的保险丝：
 	# 视频层可以后期一条条补，补之前游戏完全可用。
-	if _clip.playing:
+	if _clip.is_playing():
 		_clip.stop()
 	_clip.visible = false
 
